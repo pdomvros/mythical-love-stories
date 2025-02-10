@@ -5,52 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Μυθικά Ζευγάρια και Επιστολές</title>
     <style>
-      /* Include Tailwind CSS styles directly */
-      /* You can inline critical styles here for faster initial render */
-      /* Or leave it empty and let the included JS handle it */
+      /* You can inline critical styles here if needed */
     </style>
 </head>
 <body>
     <div id="root"></div>
 
     <script>
-      // Simulate App.js content here.  This is a simplified example.
-      // Replace with your actual App.js logic.
+      const loveStories = { /* Your loveStories data here */ };
+      const letters = { /* Your letters data here */ };
 
-      function createElement(tag, props, ...children) {
-        const element = document.createElement(tag);
-        Object.assign(element, props);
-        children.forEach(child => {
-          if (typeof child === 'string') {
-            element.appendChild(document.createTextNode(child));
-          } else {
-            element.appendChild(child);
-          }
-        });
-        return element;
-      }
+      function LoveStoriesApp() {
+        const [selectedStory, setSelectedStory] = React.useState(null);
+        const [letter, setLetter] = React.useState("");
 
-      function render(element, container) {
-        container.innerHTML = ''; // Clear existing content
-        container.appendChild(element);
-      }
+        const generateLetter = (gender) => {
+          const randomLetter = letters[gender][Math.floor(Math.random() * letters[gender].length)];
+          setLetter(randomLetter);
+        };
 
-      // Example component (replace with your actual components)
-      function App() {
-        return createElement('div', { className: 'container mx-auto p-4' },
-          createElement('h1', { className: 'text-2xl font-bold mb-4' }, 'Μυθικά Ζευγάρια και Επιστολές'),
-          createElement('p', null, 'This is a placeholder for your content.') // Your content here
+        return (
+          React.createElement('div', { className: "p-6" },
+            React.createElement('h1', { className: "text-2xl font-bold mb-4" }, 'Μυθικά Ζευγάρια και Επιστολές'),
+            React.createElement('div', { className: "grid grid-cols-2 gap-4" },
+              Object.keys(loveStories).map((couple) => (
+                React.createElement('button', {
+                  key: couple,
+                  className: "px-4 py-2 bg-blue-500 text-white rounded",
+                  onClick: () => setSelectedStory(loveStories[couple])
+                }, couple)
+              ))
+            ),
+            selectedStory && (
+              React.createElement('div', { className: "mt-6 p-4 border border-gray-300 rounded bg-gray-100" },
+                React.createElement('p', null, selectedStory)
+              )
+            ),
+            React.createElement('div', { className: "mt-6" },
+              React.createElement('h2', { className: "text-xl font-bold mb-4" }, 'Επιστολές από το Παρελθόν'),
+              React.createElement('button', {
+                className: "px-4 py-2 bg-green-500 text-white rounded mr-2",
+                onClick: () => generateLetter('male')
+              }, ' Επιστολή από Άνδρα'),
+              React.createElement('button', {
+                className: "px-4 py-2 bg-pink-500 text-white rounded",
+                onClick: () => generateLetter('female')
+              }, ' Επιστολή από Γυναίκα'),
+              letter && (
+                React.createElement('div', { className: "mt-6 p-4 border border-gray-300 rounded bg-gray-100" },
+                  React.createElement('p', null, letter)
+                )
+              )
+            )
+          )
         );
       }
 
-      // Mount the app
-      render(App(), document.getElementById('root'));
+      // Very simple, minimal ReactDOM simulation
+      const ReactDOM = {
+        render: (element, container) => {
+          container.innerHTML = ''; // Clear existing content
+          container.appendChild(element);
+        }
+      };
+
+      // React simulation
+      const React = {
+        createElement: (tag, props, ...children) => {
+          const element = document.createElement(tag);
+          Object.assign(element, props);
+          children.forEach(child => {
+            if (typeof child === 'string') {
+              element.appendChild(document.createTextNode(child));
+            } else {
+              element.appendChild(child);
+            }
+          });
+          return element;
+        },
+        useState: (initialValue) => {
+            let value = initialValue;
+            const setValue = (newValue) => {
+                value = newValue;
+                // Very basic re-render simulation.  In a real React app, this is much more complex
+                ReactDOM.render(LoveStoriesApp(), document.getElementById("root"));
+            };
+            return [value, setValue];
+        }
+      };
 
 
-      // Include Tailwind CSS via CDN (after your app renders for optimal FCP)
+      ReactDOM.render(LoveStoriesApp(), document.getElementById("root"));
+
+      // Include Tailwind CSS
       const link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = 'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css';
+      link.href = 'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css'; // Or your Tailwind CDN
       document.head.appendChild(link);
 
     </script>
