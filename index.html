@@ -3,75 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Μυθικά Ζευγάρια και Επιστολές</title>
+    <title>Μυθικά Ζευγάρια και Ιστορίες</title>
     <style>
-      /* You can inline critical styles here if needed */
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            align-items: center; /* Center horizontally */
+        }
+        .story-container {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8f8f8; /* Light gray background */
+            max-width: 600px; /* Limit width */
+        }
+        .story-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .controls {
+            display: flex; /* Arrange buttons horizontally */
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px; /* Add space between buttons */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+        button:hover {
+            background-color: #45a049; /* Darker green */
+        }
+        #help-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 1000; /* Ensure it's on top */
+        }
+        #help-modal .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <div id="root"></div>
 
-    <script>
-      const loveStories = { /* Your loveStories data here */ };
-      const letters = { /* Your letters data here */ };
+<div class="container">
+    <h1>Μυθικά Ζευγάρια και Ιστορίες</h1>
 
-      // Simplified React simulation (correct useState)
-      const React = {
-        createElement: (tag, props, ...children) => {
-          const element = document.createElement(tag);
-          Object.assign(element, props);
-          children.forEach(child => {
-            if (typeof child === 'string') {
-              element.appendChild(document.createTextNode(child));
-            } else {
-              element.appendChild(child);
-            }
-          });
-          return element;
-        },
-        useState: (initialValue) => {
-          let value = initialValue;
-          const setValue = (newValue) => {
-            value = newValue;
-            renderApp(); // Call renderApp to re-render!
-          };
-          return [value, setValue];
-        }
-      };
+    <div class="story-container">
+        <div class="story-title">Ιάσων και Μήδεια</div>
+        <p>Ο Ιάσων, αρχηγός των Αργοναυτών, ταξίδεψε στην Κολχίδα για να αποκτήσει το χρυσόμαλλο δέρας. Εκεί, η μάγισσα Μήδεια τον ερωτεύτηκε και τον βοήθησε με τα μαγικά της. Μετά την απόκτηση του δέρατος, δραπέτευσαν μαζί, αλλά ο Ιάσων την εγκατέλειψε στην Κόρινθο, οδηγώντας την σε μια τραγική εκδίκηση όπου σκότωσε τα παιδιά τους και δραπέτευσε στην Αθήνα.</p>
+    </div>
 
-      const ReactDOM = {
-        render: (element, container) => {
-          container.innerHTML = '';
-          container.appendChild(element);
-        }
-      };
+    <div class="story-container">
+        <div class="story-title">Ηρώ και Λέανδρος</div>
+        <p>Η Ηρώ ήταν ιέρεια της Αφροδίτης και ο Λέανδρος ένας νέος που την αγαπούσε. Κάθε νύχτα, κολυμπούσε τον Ελλήσποντο για να τη συναντήσει, ακολουθώντας το φως από τον πύργο της. Ένα βράδυ με καταιγίδα, το φως έσβησε, ο Λέανδρος χάθηκε στα κύματα και η Ηρώ, βλέποντας το άψυχο σώμα του, έπεσε στη θάλασσα και πνίγηκε.</p>
+    </div>
 
-      function LoveStoriesApp() {
-        const [selectedStory, setSelectedStory] = React.useState(null);
-        const [letter, setLetter] = React.useState("");
-
-        const generateLetter = (gender) => {
-          const randomLetter = letters[gender][Math.floor(Math.random() * letters[gender].length)];
-          setLetter(randomLetter);
-        };
-
-        return (
-          // ... (Your JSX converted to React.createElement calls - same as before)
-        );
-      }
-
-      function renderApp() { // This function now handles rendering
-        ReactDOM.render(LoveStoriesApp(), document.getElementById("root"));
-      }
-
-      renderApp(); // Initial render
-
-      // Include Tailwind CSS (same as before)
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css';
-      document.head.appendChild(link);
-
-    </script>
-</body>
-</html>
+    <div class="story-container">
+        <div class="story-title">Ορφέας και Ευρυδίκη</div>
+        <p>Ο Ορφέας, κορυφαίος μουσικός, έχασε τη σύζυγό του, Ευρυδίκη, όταν την δάγκωσε φίδι. Με τη μουσική του, έπεισε τον Άδη να την επιστρέψει υπό τον όρο να μην κοιτάξει πίσω. Στην τελευταία στιγμή, όμως, κοίταξε και την έχασε για πάντα.</p>
+    </div>
+    <div class="story-container">
+        <div class="story-title">Περσέας και Ανδρομέδα</div>
+        <p>Ο Περσέας, επιστρέφοντας με το κεφάλι της Μέδουσας, βρήκε την Ανδρομέδα αλυσοδεμένη σε έναν βράχο ως θυσία σε ένα θαλάσσιο τέρας. Σκότωσε το τέρας, την έσωσε και την παντρεύτηκε.</p>
+    </div>
+    <div class="story-container">
+        <div class="story-title">Θησέας και Αριάδνη</div>
+        <p>Ο Θησέας ταξίδεψε στην Κρήτη για να σκοτώσει τον Μινώταυρο. Η Αριάδνη, κόρη του Μίνωα, τον βοήθησε με τον μίτο της. Στην επιστροφή, όμως, την εγκατέλειψε στη Νάξο, όπου την πήρε υπό την προστασία του ο Διόνυσος.</p>
+    </div>
+    <div class="story-container">
+        <div class="story-title">Περικλής και Ασπασία</div>
+        <p>Ο Περικλής, ηγέτης της Αθήνας, είχε δίπλα του την Ασπασία, μια γυναίκα εξαιρετικής μόρφωσης και ρητορικής ικανότητας, που επηρέασε την πολιτική και την τέχνη της εποχής του.</p>
+    </div>
+    <div class="story-container">
+        <div class="story-title">Λεωνίδας και Γοργώ</div>
+        <p>Ο βασιλιάς της Σπάρτης, Λεωνίδας, και η σύζυγός του, Γοργώ, ενσάρκωναν τις αξίες της πόλης τους. Η Γοργώ ήταν γνωστή για τη σοφία της, ενώ ο Λεωνίδας πέρασε στην ιστορία με τη μάχη των Θερμοπυλών.</p>
+    </div>
+    <div class="story-container">
+        <div class="story-title">Αλέξανδρος και Ρωξάνη</div>
+        <p>Ο Μέγας Αλέξανδρος παντρεύτηκε τη Ρωξάνη, κόρη ενός βακτριανού ηγεμόνα, ως ένδειξη ενσωμάτωσης των ανατολικών πολιτισμών στην αυτοκρατορία του.</p>
+    </div>
+    <div class="story-container">
+        <div class="story-title">Πάρις και Ελένη</div>
+        <p>Ο Πάρις, πρίγκιπας της Τροίας, απήγαγε (ή έπεισε) την Ελένη, σύζυγο του Μενέλαου, γεγονός που προκάλεσε τον Τρωικό Πόλεμο.</p>
+    </div>
+    <div class="story-container">
+        <div class="story-title">Αγαμέμνων και Κλυταιμνήστρα</div>
+        <p>Ο Αγαμέμνων, βασιλιάς των Μυκηνών, θυσίασε την κόρη τους, Ιφιγένεια, για να εξασφαλίσει ούριους ανέμους στον στόλο του. Όταν επέστρεψε από την Τροία, η Κλυταιμνήστρα τον δολοφόνησε εκδικούμενη τον χαμό της κόρης τους.</p>
+    </div>
+    <div class="story-container">
+        <div class="story-title">Μενέλαος και Ελένη</div>
+        <p>Μετά τον Τρωικό Πόλεμο, ο Μενέλαος συγχώρεσε την Ελένη και την έφερε πίσω στη Σπάρτη, όπου έζησαν μέχρι τα
