@@ -1,99 +1,15 @@
 <!DOCTYPE html>
-<html lang="el">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Διάσημα Ζευγάρια της Μυθολογίας και της Αρχαίας Ελλάδας</title>
-    <style>
-        body { font-family: sans-serif; }
-        .story { display: none; margin-top: 10px;}
-        button { margin-right: 5px; }
-    </style>
-</head>
+    <title>Διάσημα Ζευγάρια</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script> </head>
 <body>
-
-    <h1>Διάσημα Ζευγάρια της Μυθολογίας και της Αρχαίας Ελλάδας</h1>
-
-    <button id="iason-mideia">Ιάσων και Μήδεια</button>
-    <button id="iro-leandros">Ηρώ και Λέανδρος</button>
-    <button id="orfeas-eyrydiki">Ορφέας και Ευρυδίκη</button>
-    <button id="perseas-andromeda">Περσέας και Ανδρομέδα</button> <--- Corrected ID
-    <button id="thiseas-ariadni">Θησέας και Αριάδνη</button>
-    <button id="periklis-aspasia">Περικλής και Ασπασία</button>
-    <button id="leonidas-gorgw">Λεωνίδας και Γοργώ</button>
-    <button id="alexandros-roxani">Αλέξανδρος και Ρωξάνη</button>
-    <button id="paris-eleni">Πάρις και Ελένη</button>
-    <button id="agamemnon-klytaimnistra">Αγαμέμνων και Κλυταιμνήστρα</button>
-    <button id="menelaos-eleni">Μενέλαος και Ελένη</button>
-    <button id="odysseas-pinelopi">Οδυσσέας και Πηνελόπη</button>
-    <button id="admitos-alkisti">Άδμητος και Άλκηστη</button>
-    <button id="apollon-dafni">Απόλλων και Δάφνη</button>
-    <button id="zeus-ira">Ζευς και Ήρα</button>
-
-   <div id="iason-mideia-story" class="story">
-        <p>Ο Ιάσων, ήρωας της ελληνικής μυθολογίας, ηγήθηκε της Αργοναυτικής Εκστρατείας... (Rest of the Iason and Medea story)</p>
+    <div id="app">
+        <button v-for="couple in couples" :key="couple" @click="showStory(couple)">{{ couple }}</button>
+        <div v-for="couple in couples" :key="couple" v-if="currentStory === couple">
+            <p>{{ stories[couple] }}</p>
+        </div>
     </div>
-    <div id="iro-leandros-story" class="story">
-        <p>Η Ηρώ ήταν ιέρεια της Αφροδίτης... (Rest of the Hero and Leander story)</p>
-    </div>
-    <div id="orfeas-eyrydiki-story" class="story">
-        <p>Ο Ορφέας, θρυλικός μουσικός και ποιητής... (Rest of the Orpheus and Eurydice story)</p>
-    </div>
-    <div id="perseas-andromeda-story" class="story"> <--- Corrected ID
-        <p>Ο Περσέας, γιος του Δία και της Δανάης... (Rest of the Perseus and Andromeda story)</p>
-    </div>
-    <div id="thiseas-ariadni-story" class="story">
-        <p>Ο Θησέας, πρίγκιπας της Αθήνας... (Rest of the Theseus and Ariadne story)</p>
-    </div>
-    <div id="periklis-aspasia-story" class="story">
-        <p>Ο Περικλής, ένας από τους σπουδαιότερους ηγέτες... (Rest of the Pericles and Aspasia story)</p>
-    </div>
-    <div id="leonidas-gorgw-story" class="story">
-        <p>Ο Λεωνίδας, βασιλιάς της Σπάρτης... (Rest of the Leonidas and Gorgo story)</p>
-    </div>
-    <div id="alexandros-roxani-story" class="story">
-        <p>Ο Μέγας Αλέξανδρος, ο μεγαλύτερος στρατηλάτης... (Rest of the Alexander and Roxane story)</p>
-    </div>
-    <div id="paris-eleni-story" class="story">
-        <p>Ο Πάρις, πρίγκιπας της Τροίας... (Rest of the Paris and Helen story)</p>
-    </div>
-    <div id="agamemnon-klytaimnistra-story" class="story">
-        <p>Ο Αγαμέμνων, βασιλιάς των Μυκηνών... (Rest of the Agamemnon and Clytemnestra story)</p>
-    </div>
-    <div id="menelaos-eleni-story" class="story">
-        <p>Ο Μενέλαος, βασιλιάς της Σπάρτης... (Rest of the Menelaus and Helen story)</p>
-    </div>
-    <div id="odysseas-pinelopi-story" class="story">
-        <p>Ο Οδυσσέας, βασιλιάς της Ιθάκης... (Rest of the Odysseus and Penelope story)</p>
-    </div>
-    <div id="admitos-alkisti-story" class="story">
-        <p>Ο βασιλιάς Άδμητος... (Rest of the Admetus and Alcestis story)</p>
-    </div>
-    <div id="apollon-dafni-story" class="story">
-        <p>Ο θεός Απόλλων... (Rest of the Apollo and Daphne story)</p>
-    </div>
-    <div id="zeus-ira-story" class="story">
-        <p>Ο Δίας, βασιλιάς των θεών... (Rest of the Zeus and Hera story)</p>
-    </div>
-
-    <script>
-        const buttons = document.querySelectorAll('button');
-        const stories = document.querySelectorAll('.story');
-
-        buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetStoryId = button.id + "-story";
-
-                stories.forEach(story => {
-                    if (story.id === targetStoryId) {
-                        story.style.display = "block";
-                    } else {
-                        story.style.display = "none";
-                    }
-                });
-            });
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
